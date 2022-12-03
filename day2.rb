@@ -32,37 +32,41 @@ class Game
   end
 
   def score
-    if oponent == :rock && player == :scissors
-      player_points + loss
-    elsif oponent == :rock && player == :paper
-      player_points + win
-    elsif oponent == :paper && player == :scissors
-      player_points + win
-    elsif oponent == :paper && player == :rock
-      player_points + loss
-    elsif oponent == :scissors && player == :rock
-      player_points + win
-    elsif oponent == :scissors && player == :paper
-      player_points + loss
-    elsif oponent == player
-      player_points + draw
-    end
+    return win_points if win
+    return draw_points if draw
+    return loss_points if loss
+  end
+
+  def loss
+    oponent == :rock && player == :scissors ||
+    oponent == :paper && player == :rock ||
+    oponent == :scissors && player == :paper
+  end
+
+  def win
+    oponent == :scissors && player == :rock ||
+    oponent == :paper && player == :scissors ||
+    oponent == :rock && player == :paper
+  end
+
+  def draw
+    oponent == player
   end
 
   def player_points
     points[player]
   end
 
-  def win
-    points[:win]
+  def win_points
+    points[:win] + player_points
   end
 
-  def loss
-    points[:loss]
+  def loss_points
+    points[:loss] + player_points
   end
 
-  def draw
-    points[:draw]
+  def draw_points
+    points[:draw] + player_points
   end
 
   def oponent

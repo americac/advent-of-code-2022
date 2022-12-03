@@ -37,20 +37,22 @@ class Game
     return loss_points if loss
   end
 
+  private
+
   def loss
-    oponent == :rock && player == :scissors ||
-    oponent == :paper && player == :rock ||
-    oponent == :scissors && player == :paper
+    opponent == :rock && player == :scissors ||
+    opponent == :paper && player == :rock ||
+    opponent == :scissors && player == :paper
   end
 
   def win
-    oponent == :scissors && player == :rock ||
-    oponent == :paper && player == :scissors ||
-    oponent == :rock && player == :paper
+    opponent == :scissors && player == :rock ||
+    opponent == :paper && player == :scissors ||
+    opponent == :rock && player == :paper
   end
 
   def draw
-    oponent == player
+    opponent == player
   end
 
   def player_points
@@ -69,7 +71,7 @@ class Game
     points[:draw] + player_points
   end
 
-  def oponent
+  def opponent
     game_mapping[turn.first.to_sym]
   end
 

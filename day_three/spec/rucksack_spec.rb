@@ -12,21 +12,31 @@ RSpec.describe Rucksack do
     ]
   end
 
-  describe "first_compartment" do
-    let(:rucksack) { Rucksack.new(items.first) }
-    it "returns first half of item string" do
+  describe "#first_compartment" do
+    it "returns first half of item string for first item list" do
+      rucksack = Rucksack.new(items.first)
       expect(rucksack.first_compartment.join).to eq("vJrwpWtwJgWr")
     end
-  end
 
-  describe "second_compartment" do
-    let(:rucksack) { Rucksack.new(items.first) }
-    it "returns second half of item string" do
-      expect(rucksack.second_compartment.join).to eq("hcsFMMfFFhFp")
+    it "returns first half of item string for last item list" do
+      rucksack = Rucksack.new(items.last)
+      expect(rucksack.first_compartment.join).to eq("CrZsJsPPZsGz")
     end
   end
 
-  describe "item_count" do
+  describe "#second_compartment" do
+    it "returns second half of item string for first item list" do
+      rucksack = Rucksack.new(items.first)
+      expect(rucksack.second_compartment.join).to eq("hcsFMMfFFhFp")
+    end
+
+    it "returns second half of item string for first item list" do
+      rucksack = Rucksack.new(items.last)
+      expect(rucksack.second_compartment.join).to eq("wwsLwLmpwMDw")
+    end
+  end
+
+  describe "#item_count" do
     it "returns accurate item count for first item" do
       first_item_list = Rucksack.new(items.first)
       expect(first_item_list.item_count).to eq 24
@@ -87,8 +97,5 @@ RSpec.describe Rucksack do
       rucksack_without_dup_item_types =  Rucksack.new(item_list)
       expect(rucksack_without_dup_item_types.item_types_in_both_compartments).to be_empty
     end
-  end
-
-  describe "#sum_of_item_priorties" do
   end
 end

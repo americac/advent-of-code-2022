@@ -25,7 +25,7 @@ class Rucksack
     @all_item_types ||= ('a'..'z').to_a + ('A'..'Z').to_a
   end
 
-  def item_types_in_both_compartments
+  def shared_item_types
     first_compartment.uniq & second_compartment.uniq
   end
 end

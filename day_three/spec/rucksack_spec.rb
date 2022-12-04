@@ -4,10 +4,6 @@ RSpec.describe Rucksack do
   let(:items) do
     [
       "vJrwpWtwJgWrhcsFMMfFFhFp",
-      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
-      "PmmdzqPrVvPwwTWBwg",
-      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-      "ttgJtRGJQctTZtZT",
       "CrZsJsPPZsGzwwsLwLmpwMDw",
     ]
   end
@@ -86,16 +82,16 @@ RSpec.describe Rucksack do
     end
   end
 
-  describe "#items_in_both_compartments" do
+  describe "#shared_item_types" do
     it "returns an array of item types found in both compartments" do
       rucksack_with_dup_item_types =  Rucksack.new(items.first)
-      expect(rucksack_with_dup_item_types.item_types_in_both_compartments).to eq ['p']
+      expect(rucksack_with_dup_item_types.shared_item_types).to eq ['p']
     end
 
     it "returns an empty array when item types not found in both compartments" do
       item_list = "ttgJtRGJQcxTZsZT"
       rucksack_without_dup_item_types =  Rucksack.new(item_list)
-      expect(rucksack_without_dup_item_types.item_types_in_both_compartments).to be_empty
+      expect(rucksack_without_dup_item_types.shared_item_types).to be_empty
     end
   end
 end

@@ -19,6 +19,13 @@ RSpec.describe Rucksack do
     end
   end
 
+  describe "second_compartment" do
+    let(:rucksack) { Rucksack.new(items.first) }
+    it "returns second half of item string" do
+      expect(rucksack.second_compartment.join).to eq("hcsFMMfFFhFp")
+    end
+  end
+
   describe "item_count" do
     it "returns accurate item count for first item" do
       first_item_list = Rucksack.new(items.first)

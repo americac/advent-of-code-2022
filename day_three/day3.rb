@@ -30,14 +30,8 @@
 #Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
 
 
-require 'rucksack'
+require 'rucksack_calculator'
 input_file = File.open(ARGV.first)
 file_data = input_file.readlines.map(&:chomp)
 
-item_count = []
-file_data.each do |items|
-  rucksack = Rucksack.new(items)
-
-end
-
-
+RucksackCalculator.new(file_data).sum_shared_item_type_priorities

@@ -24,6 +24,20 @@ RSpec.describe RucksackCalculator do
     it "returns shared item types when found" do
       expect(rucksack_calculator.get_shared_item_types).to eq ["p", "L", "P", "v", "t", "s"]
     end
+
+    it "returns empty array when no shared item types found" do
+      no_shared_item_types =
+        [
+          "vJrwXWtwJgWrhcsFMMfFFhFp",
+          "jqHRNqRjqzjGDLGArsFMfFZSrBrFZsSB",
+          "PmmdzqPrVvAwwTWBwg",
+          "wMqvLMZHhHMvwLHjbacjnnSBnbTQFn",
+          "ttgJtRGJQcaTZaZT",
+          "CrZsJsPPZsGzwweLwLmpwMDw",
+        ]
+       rucksack_calculator = RucksackCalculator.new(no_shared_item_types)
+       expect(rucksack_calculator.get_shared_item_types).to be_empty
+    end
   end
 
 

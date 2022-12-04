@@ -13,16 +13,39 @@ RSpec.describe RucksackCalculator do
   end
   let(:rucksack_calculator) { RucksackCalculator.new(rucksacks) }
 
-
   describe "#sum_shared_item_type_priorities" do
     it "returns the correct sum" do
       expect(rucksack_calculator.sum_shared_item_type_priorities).to eq 157
     end
   end
 
-  describe "#get_shared_item_types" do
+  describe "#set_shared_item_types" do
     it "returns shared item types when found" do
-      expect(rucksack_calculator.get_shared_item_types).to eq ["p", "L", "P", "v", "t", "s"]
+      rucksack_calculator.set_shared_item_types
+      expect(rucksack_calculator.shared_item_types).to eq ["p", "L", "P", "v", "t", "s"]
+    end
+
+    it "returns empty array when no shared item types found" do
+      no_shared_item_types =
+        [
+          "vJrwXWtwJgWrhcsFMMfFFhFp",
+          "jqHRNqRjqzjGDLGArsFMfFZSrBrFZsSB",
+          "PmmdzqPrVvAwwTWBwg",
+          "wMqvLMZHhHMvwLHjbacjnnSBnbTQFn",
+          "ttgJtRGJQcaTZaZT",
+          "CrZsJsPPZsGzwweLwLmpwMDw",
+        ]
+      rucksack_calculator = RucksackCalculator.new(no_shared_item_types)
+        rucksack_calculator.set_shared_item_types
+       expect(rucksack_calculator.shared_item_types).to be_empty
+    end
+  end
+
+  describe "#set_priorities" do
+    it "sets priorities for shared item types when found" do
+      rucksack_calculator.set_shared_item_types
+      rucksack_calculator.set_priorities
+      expect(rucksack_calculator.priorities).to eq [16, 38, 42, 22, 20, 19]
     end
 
     it "returns empty array when no shared item types found" do
@@ -36,10 +59,9 @@ RSpec.describe RucksackCalculator do
           "CrZsJsPPZsGzwweLwLmpwMDw",
         ]
        rucksack_calculator = RucksackCalculator.new(no_shared_item_types)
-       expect(rucksack_calculator.get_shared_item_types).to be_empty
+       expect(rucksack_calculator.priorities).to be_empty
     end
   end
-
 
   describe ".item_priority" do
     let(:expected_hash) do
